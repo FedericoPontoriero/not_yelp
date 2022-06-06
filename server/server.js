@@ -28,23 +28,39 @@ app.get('/api/v1/restaurants', async (req, res) => {
 	}
 });
 
-app.get('/api/v1/restaurants/:id', (req, res) => {
-	res.status(200).json({
-		status: 'success',
-		data: {
-			restaurants: 'mcdonalds',
-		},
-	});
+app.get('/api/v1/restaurants/:id', async (req, res) => {
+	try {
+		const results = await db.query('select * from restaurants where id = $1', [
+			req.params.id,
+		]);
+
+		res.status(200).json({
+			status: 'success',
+			data: {
+				restaurants: results.rows[0],
+			},
+		});
+	} catch (error) {
+		console.log(error);
+	}
 });
 
 // Post routes
-app.post('/api/v1/restaurants', (req, res) => {
-	res.status(200).json({
-		status: 'success',
-		data: {
-			restaurants: 'mcdonalds',
-		},
-	});
+app.post('/api/v1/restaurants', async (req, res) => {
+	try {
+		const results = await db.query(
+			'insert into restaurants (name, location, price_range) values ($1, $2, $3) returning *',
+			[req.body.name, req.body.location, req.body.price_range]
+		);
+		res.status(200).json({
+			status: 'success',
+			data: {
+				restaurant: results.rows[0],
+			},
+		});
+	} catch (error) {
+		console.log(error);
+	}
 });
 
 // Update routes
