@@ -64,14 +64,35 @@ app.post('/api/v1/restaurants', async (req, res) => {
 });
 
 // Update routes
-app.put('/api/v1/restaurants/:id', (req, res) => {
-	console.log(req.params.id);
+app.put('/api/v1/restaurants/:id', async (req, res) => {
+	try {
+		const results = await db.query(
+			'update restaurants set name = $1, location = $2, price_range = $3 where id = $4 returning *',
+			[req.body.name, req.body.location, req.body.price_range, req.params.id]
+		);
+		res.status(200).json({
+			status: 'success',
+			data: {
+				restaurant: results.rows[0],
+			},
+		});
+	} catch (error) {
+		console.log(error);
+	}
 });
 
 // Delete routes
-app.delete('/api/v1/restaurants/:id', (req, res) => {
-	console.log('delete');
-	res.status(204).json();
+app.delete('/api/v1/restaurants/:id', async (req, res) => {
+	try {
+		const results = await db.query('delete from restaurants where id = $1', [
+			req.params.id,
+		]);
+		res.status(204).json({
+			status: 'success',
+		});
+	} catch (error) {
+		console.log(error);
+	}
 });
 
 // Server initialization
