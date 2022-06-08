@@ -6,17 +6,23 @@ import RestaurantdetailPage from './routes/RestaurantdetailPage';
 
 const App = () => {
 	return (
-		<BrowserRouter>
-			<Routes>
-				<Route exact path='/' element={<Home />} />
-				<Route exact path='/restaurants/:id/updates' element={<UpdatePage />} />
-				<Route
-					exact
-					path='/restaurants/:id'
-					element={<RestaurantdetailPage />}
-				/>
-			</Routes>
-		</BrowserRouter>
+		<div className='container'>
+			<BrowserRouter>
+				<Routes>
+					<Route exact path='/' element={<Home />} />
+					<Route
+						exact
+						path='/restaurants/:id/updates'
+						element={<UpdatePage />}
+					/>
+					<Route
+						exact
+						path='/restaurants/:id'
+						element={<RestaurantdetailPage />}
+					/>
+				</Routes>
+			</BrowserRouter>
+		</div>
 	);
 };
 
