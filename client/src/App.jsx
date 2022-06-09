@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter, Routes, Route, Link } from 'react-router-dom';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import UpdatePage from './routes/UpdatePage';
 import Home from './routes/Home';
 import RestaurantdetailPage from './routes/RestaurantdetailPage';
@@ -14,7 +14,7 @@ const App = () => {
 						<Route exact path='/' element={<Home />} />
 						<Route
 							exact
-							path='/restaurants/:id/updates'
+							path='/restaurants/:id/update'
 							element={<UpdatePage />}
 						/>
 						<Route

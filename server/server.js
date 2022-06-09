@@ -1,5 +1,5 @@
 const express = require('express');
-const morgan = require('morgan');
+const cors = require('cors');
 
 require('dotenv').config();
 
@@ -8,14 +8,13 @@ const app = express();
 const db = require('./db');
 // Middlewares
 app.use(express.json());
-
+app.use(cors());
 //Routes
 
 // Get routes
 app.get('/api/v1/restaurants', async (req, res) => {
 	try {
 		const results = await db.query('select * from restaurants');
-		console.log(results);
 		res.status(200).json({
 			status: 'success',
 			results: results.rows.length,
