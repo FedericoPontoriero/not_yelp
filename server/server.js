@@ -51,7 +51,7 @@ app.post('/api/v1/restaurants', async (req, res) => {
 			'insert into restaurants (name, location, price_range) values ($1, $2, $3) returning *',
 			[req.body.name, req.body.location, req.body.price_range]
 		);
-		res.status(200).json({
+		res.status(201).json({
 			status: 'success',
 			data: {
 				restaurant: results.rows[0],
