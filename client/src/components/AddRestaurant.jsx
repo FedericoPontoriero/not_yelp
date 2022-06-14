@@ -51,10 +51,10 @@ function AddRestaurant() {
 							className='custom-select my-1 mr-sm-2'>
 							<option disabled>Price Range</option>
 							<option value='1'>$</option>
-							<option value='2'>$</option>
-							<option value='3'>$</option>
-							<option value='4'>$</option>
-							<option value='5'>$</option>
+							<option value='2'>$$</option>
+							<option value='3'>$$$</option>
+							<option value='4'>$$$$</option>
+							<option value='5'>$$$$$</option>
 						</select>
 					</div>
 					<button
